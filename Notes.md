@@ -1,5 +1,8 @@
 # Creating a PostgreSQL Backend
 
+## Why PostgreSQL?
+SQLite erases ALL data every 24 hours. Using PostgreSQL allows for truly persistent data to make apps that are better for production. An example app would be a social media website. With SQLite, user accounts would be deleted from the database after 24 hours, thereby forcing users to remake their accounts.
+
 ## Setting up API
 
 ### **Initiate git repo**
@@ -44,9 +47,34 @@
 
 ### **Set up file structure**
   - add index.js [`'/index.js'`]
-  - add server.js [`'/server.js'`]
-
+  - add api folder
+    - add server.js [`'./api/server'`]
+    - add helpers folder
+    - add routers folder
+  - run `knex init` to get knexfile at src
+  - add .env [`'/.env'`]
+  - add data folder
+    - add migrations file [automatic (knex)]
+    - add seeds file [automatic (knex)]
 
 #### _Package.json_
   - add `"server": "nodemon index.js"` to scripts
-    
+
+#### _index.js_
+  - set up dynamic port
+
+#### _server.js_
+  - set up and start server
+
+#### _knexfile.js_
+  - remove staging
+  - add `client: 'pg'` to both development and production
+  - add connection to database in place of `filename`
+  - add `useNullAsDefault: true`
+  - add migrations ['/data/migrations'] and seeds ['/data/seeds'] directories to both development and production
+  - add `process.env.DATABASE_URL` to production.connection
+
+#### _.env_
+  - add username
+  - add database name
+  - add password
