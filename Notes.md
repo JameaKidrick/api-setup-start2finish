@@ -48,33 +48,61 @@ SQLite erases ALL data every 24 hours. Using PostgreSQL allows for truly persist
 ### **Set up file structure**
   - add index.js [`'/index.js'`]
   - add api folder
-    - add server.js [`'./api/server'`]
+    - add server.js [`'/api/server'`]
     - add helpers folder
     - add routers folder
   - run `knex init` to get knexfile at src
   - add .env [`'/.env'`]
   - add data folder
+    - add database config file [`'/data/dbConfig.js'`]
     - add migrations file [automatic (knex)]
     - add seeds file [automatic (knex)]
 
 #### _Package.json_
   - add `"server": "nodemon index.js"` to scripts
+  - add `"start": "node index.js"` to scripts (if deploying to heroku)
 
 #### _index.js_
+  - import server
   - set up dynamic port
+  - connect server to port
 
 #### _server.js_
-  - set up and start server
+  - import express
+  - import helmet
+  - import morgan
+  - import cors
+  - create/start server using express
+  - use helmet
+  - allow express to parse json
+  - use cors
+  - use morgan version `dev`
+  - add a sanity check
+  - export server
 
 #### _knexfile.js_
   - remove staging
   - add `client: 'pg'` to both development and production
   - add connection to database in place of `filename`
   - add `useNullAsDefault: true`
-  - add migrations ['/data/migrations'] and seeds ['/data/seeds'] directories to both development and production
+  - add migrations [`'./data/migrations'`] and seeds [`'./data/seeds'`] directories to both development and production
   - add `process.env.DATABASE_URL` to production.connection
+  - import dotenv => `require('dotenv').config()`
 
 #### _.env_
-  - add username
-  - add database name
+  <!-- username and password can be changed in pgAdmin if a new servergroup is created, otherwise password is stored  already and username is in PostgreSQL 12 properties -->
+  - add username 
+  - add database name (created in pgadmin)
   - add password
+
+#### _dbConfig.js_
+  - import knex
+  - import knexfile
+  - export 
+
+### DB Schema
+  - location: `/design-files/schema_design.jpg`
+
+### Migrations
+  - create migration => run `knex migrate:make <name>`
+    - here, a different migration is created per table
