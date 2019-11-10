@@ -41,7 +41,6 @@ const list_tasks = [
 ];
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex('list_tasks')
     .then(function () {
       // Inserts seed entries
