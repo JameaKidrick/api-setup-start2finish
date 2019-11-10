@@ -8,7 +8,8 @@ exports.up = function(knex) {
       .integer('list_id')
       .unsigned()
       .notNullable()
-      .references('lists.id')
+      .references('id')
+      .inTable('lists')
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
 
@@ -16,7 +17,8 @@ exports.up = function(knex) {
       .integer('task_id')
       .unsigned()
       .notNullable()
-      .references('tasks.id')
+      .references('id')
+      .inTable('tasks')
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
 

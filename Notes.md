@@ -18,7 +18,7 @@ SQLite erases ALL data every 24 hours. Using PostgreSQL allows for truly persist
   - run `git checkout -b '<branch-name>'`
 
 ### **Add dependencies**
-  - run `npm i express helmet knex pg morgan dotenv cors` 
+  - run `npm i express helmet knex knex-cleaner pg morgan dotenv cors` 
     - express
       - web framework
       - [https://www.npmjs.com/package/express]
@@ -28,6 +28,9 @@ SQLite erases ALL data every 24 hours. Using PostgreSQL allows for truly persist
     - knex
       - multi-dialect (MSSQL, MySQL, PostgreSQL, SQLite3, Oracle (including Oracle Wallet Authentication)) query builder for Node.js
       - [https://www.npmjs.com/package/knex]
+    - knex-cleaner
+      - helper library to clean a PostgreSQL, MySQL or SQLite3 database tables using Knex
+      - [https://www.npmjs.com/package/knex-cleaner]
     - pg (postgresql)
       - PostgreSQL client for Node.js
       - [https://www.npmjs.com/package/pg]
@@ -106,3 +109,10 @@ SQLite erases ALL data every 24 hours. Using PostgreSQL allows for truly persist
 ### Migrations
   - create migration => run `knex migrate:make <name>`
     - here, a different migration is created per table
+  - create tables => run `knex migrate:up` (to 'push' one-by-one) OR run `knex migrate:latest` (to 'push' all at once')
+  - remove tables => run `knex migrate:down` (to remove one-by-one) OR run `knex migrate:rollback` (to remove all at once')
+
+### Seeds
+  - create seeds => run `knex seed:make <name>`
+    - make sure to create the cleanup seed
+  - run seeds => `knex seed:run`
